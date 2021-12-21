@@ -1,0 +1,2 @@
+htpasswd_path: /etc/httpd/conf/htpasswd
+htaccess_username: sandrine
