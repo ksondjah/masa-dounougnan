@@ -1,8 +1,8 @@
 # Ajout user dans htaccess
 ---
 
-- hosts: centos
-  become: yes
+- hosts: all
+#  become: yes
   vars_files:
     - /home/user-ansible/vars.yml
 
