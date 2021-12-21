@@ -1,0 +1,37 @@
+# Ajout user dans htaccess
+---
+
+- hosts: centos
+  become: yes
+  vars_files:
+    - /home/user-ansible/vars.yml
+
+  tasks:
+          - name: HTpasswd  Ajout Utilisateur
+            htpasswd:
+                path: "{{ htpasswd_path }}"
+                name: "{{ htaccess_username }}"
+                password: "{{ htaccess_username }}"
+                owner: root
+                group: root
+                mode: 0644
+            notify: httpd service
+            tags:
+              - addUserHtaccess
+
+          - name: HTpasswd Delete Utilisateur
+            htpasswd:
+                path: "{{ htpasswd_path }}"
+                name: "{{ htaccess_username }}"
+                state: absent
+            notify: httpd service
+            tags:
+              - rmvUserHtaccess
+
+  handlers:
+          - name: Restart and enable httpd
+            service:
+               name: httpd
+               state: restarted
+               enabled: yes
+            listen: httpd service
