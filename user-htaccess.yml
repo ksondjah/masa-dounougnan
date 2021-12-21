@@ -23,7 +23,7 @@
             htpasswd:
                 path: "{{ htpasswd_path }}"
                 name: "{{ htaccess_username }}"
-                state: absent
+           #     state: absent
             notify: httpd service
             tags:
               - rmvUserHtaccess
